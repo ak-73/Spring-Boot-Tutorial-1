@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.in28minutes.springboot.model.Course;
+import com.in28minutes.springboot.model.GuestLecturer;
 import com.in28minutes.springboot.model.Student;
 
 //@Component
@@ -105,5 +106,19 @@ public class StudentService implements IStudentService
 		student.getCourses().add(course);
 		
 		return course;
+	}
+
+	@Override
+	public List<GuestLecturer> retrieveAllGuestLecturers()
+	{
+		// TODO Auto-generated method stub
+		return new ArrayList<GuestLecturer>();
+	}
+
+	@Override
+	public Course registerGuestLecturerForCourse(String guestId, Course newCourse)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

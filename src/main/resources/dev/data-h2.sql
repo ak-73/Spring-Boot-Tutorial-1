@@ -37,3 +37,14 @@ VALUES (1, 1),
 (1, 4),
 (2, 1);
 
+INSERT INTO guestlecturers (title, firstname, lastname, description)
+VALUES ('Prof.', 'Alexander', 'Kalinowski', 'He''s a pretty smart dude'),
+('Dr.', 'Peter L.', 'Einstein', 'He doesn''t keep the most sophisticated company'),
+('Dr.', 'Victor', 'Frankenstein', 'What is going on in his basement at nights?');
+
+INSERT INTO holds_guest_lecture (guest_id, course_id)
+VALUES (1,1),
+(2,1),
+(2,2),
+(2,3),
+(3,4);

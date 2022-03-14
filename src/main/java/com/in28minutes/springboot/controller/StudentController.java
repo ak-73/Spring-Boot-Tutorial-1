@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.in28minutes.springboot.model.Course;
+import com.in28minutes.springboot.model.GuestLecturer;
 import com.in28minutes.springboot.model.Student;
 import com.in28minutes.springboot.service.IStudentService;
 
@@ -30,7 +31,7 @@ public class StudentController
 	}
 	
 	@GetMapping("/students")
-	public List<Student> retrieveAlleStudents()
+	public List<Student> retrieveAllStudents()
 	{
 		return studentService.retrieveAllStudents();
 	}
@@ -51,6 +52,26 @@ public class StudentController
 	public ResponseEntity<Void> registerStudentForCourse(@PathVariable String studentId, @RequestBody Course newCourse)
 	{		
 		Course course = studentService.addCourseToCurriculum(studentId, newCourse);
+		
+		if (course == null) return ResponseEntity.noContent().build();
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(course.getId()).toUri();
+		
+		return ResponseEntity.created(location).build();
+	}
+	
+	@GetMapping("/guests")
+	public List<GuestLecturer> retrieveAllGuests()
+	{
+		return studentService.retrieveAllGuestLecturers();
+	}
+	
+	//TODO other getters like "/guests/{guest_id}"
+	
+	@PostMapping("/guests/{guestId}/courses")
+	public ResponseEntity<Void> registerGuestLecturerForCourse(@PathVariable String guestId, @RequestBody Course newCourse)
+	{		
+		Course course = studentService.registerGuestLecturerForCourse(guestId, newCourse);
 		
 		if (course == null) return ResponseEntity.noContent().build();
 		
